@@ -1,0 +1,26 @@
+##CODE BOOK##
+
+The purpose of this code is to achieve the following:
+
+1. Merges the training and the test sets to create one data set.
+2. Extracts only the measurements on the mean and standard deviation for each measurement.
+3. Uses descriptive activity names to name the activities in the data set
+4. Appropriately labels the data set with descriptive variable names.
+5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+
+The way I wrote the code addresses these objectives in a different order, but the end result is the same.
+
+After reading in all the required data, feature names are added as column headings for the "x_test" and "x_train" tables, which partly addresses point 4 (headings are cleaned later).
+
+The variables are then subsetted to only include columns with either "mean" or "std" in the heading, addressing point 2.
+
+The activities are then named using the "y_test" and "y_train" data sets joined with the "activity_labels" data (using sqldf package), addressing point 3.
+
+Next, the test and training data are merged into a single data frame, addressing point 1.
+
+To complete point 4, the column headings are made slightly more descriptive using a for loop and gsub() to replace existing headings.
+
+The aggregate() function is used to calculate the mean of each variable for each subject/activity pair. This gives a total of 180 rows (6 activities across 30 subjects).
+
+Finally, the output of the above aggregation is written into a new .txt file called "aggregated.txt".
+
